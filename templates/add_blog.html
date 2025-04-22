@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %} Add Blog {% endblock title %}
+
+{% block content %}
+
+<section class="add-blog">
+    <div class="container">
+        <div class="row py-5 justify-content-center">
+            <div class="col-md-8">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {{form.media}}
+                    {% csrf_token %}
+                  
+                    
+                    <div class="form-group">
+                        
+                        <label for="title"> Blog Title </label>
+                        <input class="form-control w-100" type="text<" name="title">
+                        <p class="text-danger py-1">{{form.title.errors}} </p>
+                                               
+                    </div>
+                    <div class="form-group">
+                        <label for="title"> Blog Category </label>
+                        <select class="form-control w-100"  name="category" id="category_id">                           
+                            {% for category in categories %}
+                            <option value="{{category.id}}">{{category.title}}</option>
+                            {% endfor %}
+                        </select>
+                          
+                    </div>
+                    <div class="form-group">
+                        <label for="title"> Description </title>
+                        {{form.description|safe}}  
+                    </div>
+                    <div class="form-group">
+                        <label for="banner"> Blog Banner </label>
+                        <input class="form-control w-100" type="file" name="banner" id="banner-upload">
+                        <p class="text-danger py-1">{{form.banner.errors}}</p>
+                    
+                        
+                        <div id="image-preview-container" style="display: none;">
+                            <img id="image-preview" src="" alt="Image Preview" style="max-width: 100px; margin-top: 10px;">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="title"> Tags </label>
+                        <textarea class="form-control" name="tags" id="" cols="100" rows="5" placeholder="Enter your comma separated value"> </textarea> 
+                        <p class="text-danger py-1">{{form.tags.errors}} </p>
+                    </div>
+                    <div class="form-group">
+                       
+                        <button type="submit" class="btn btn-primary btn-block">Add </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+</section>
+
+<script>
+    document.getElementById('banner-upload').addEventListener('change', function(event) {
+        var reader = new FileReader();  // FileReader তৈরি করছি ছবি পড়ার জন্য
+        reader.onload = function(e) {  // যখন ছবি লোড হবে, তখন এই ফাংশন চলবে
+            var previewContainer = document.getElementById('image-preview-container');
+            var previewImage = document.getElementById('image-preview');
+            
+            previewImage.src = e.target.result;  // ছবির প্রিভিউ দেখানো
+            previewContainer.style.display = 'block';  // প্রিভিউ ডিভটি দৃশ্যমান করা
+        };
+
+        reader.readAsDataURL(event.target.files[0]);  // ফাইলটি পড়ছি
+    });
+</script>
+
+
+{% endblock content %}

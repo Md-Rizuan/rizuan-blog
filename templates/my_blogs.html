@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %} Blog details {% endblock title %}
+
+{% block content %}
+
+<section>
+
+    <div class="container-fluid">
+        <div class="row" py-5>
+            {% for blog in blogs %}
+            <div class="col-md-4 my-2">
+                <div class="card">
+                    <img class="card-img-top img-fluid" style="width:100% height:320px" src="{{blog.banner.url}}" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text d-flex flex-row">
+                            {{ blog.title }}
+                            <a class="px-2 ml-auto" href="">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a class="px-2 ml-auto" href="">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </p>
+                        
+                        
+                      </p>
+                    </div>
+                  </div>
+            </div>
+        {% endfor %}
+
+
+        </div>
+        <div class="row py-3 justify-content-center">
+            {% include 'pagination.html' %}
+        </div>
+    </div>
+   
+</section>
+
+
+{% endblock content %}
