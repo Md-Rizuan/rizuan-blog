@@ -1,0 +1,56 @@
+.empty-heart
+{
+    color:#CDCDCD !important;
+}
+
+.blog-post .submit-comment textarea{
+    text-transform: None !important;
+}
+
+input, textarea{
+    text-transform: none !important;
+}
+
+.btn-primary button {
+    display: inline-block;
+    background-color: #f48840;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 12px 20px;
+    text-transform: uppercase;
+    transition: all .3s;
+    border: none;
+    outline: none;
+}
+.btn-primary1 {
+    display: inline-block;
+    background-color: #f48840;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 12px 20px;
+    text-transform: uppercase;
+    transition: all .3s;
+    border: none;
+    outline: none;
+}
+
+.profile-picture{
+    max-width: 100%;
+    width: 180px;
+    height: 180px;
+}
+
+.owl-carousel .owl-item img{
+    height: 440px !important;
+}
+.errorlist{
+    color: red;
+    margin-bottom: 20px !important;
+}
+
+.contact-us .contact-form input{
+
+    margin-bottom: 5px;
+}
