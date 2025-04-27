@@ -13,6 +13,8 @@ from .models import (
     Category,
     Comment,
     Reply,
+    District,
+    Thana,
     
 )
 from .forms import TextForm, AddBlogForm
@@ -200,9 +202,15 @@ def add_blog(request):
           if form.is_valid():
                user = get_object_or_404(User, pk=request.user.pk)
                category = get_object_or_404(Category, pk=request.POST['category'])
+               #district = District.objects.all(District, pk=request.POST['district'])
+               #print(district)
+               #thana = Thana(Thana, pk=request.POST['thana'])
+               #print(thana)
                blog = form.save(commit=False)
                blog.user = user
                blog.category = category
+               #blog.district = district  # Save the district
+              # blog.thana = thana 
                blog.save()
 
                messages.success(request, "Blog added successfully")
@@ -211,12 +219,19 @@ def add_blog(request):
                print(form.errors)
  
      context ={
-          "form":form
+          "form":form,
+          "districts": District.objects.all()
      }
      return render(request, 'add_blog.html', context)
         
 
-
+def get_thanas(request):
+    district_id = request.GET.get('district_id')
+    if district_id:
+        thanas = Thana.objects.filter(district_id=district_id).values('id', 'name')
+        return JsonResponse({'thanas': list(thanas)})
+    else:
+        return JsonResponse({'thanas': []})
 
           
 

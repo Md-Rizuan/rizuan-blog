@@ -31,6 +31,18 @@ class Tag(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+class District(models.Model):
+    name = models.CharField(max_length=100)
+
+
+    def __str__(self):
+        return self.name
+class Thana(models.Model):
+    district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='thanas')
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name} ({self.district.name})"
 
 class Blog(models.Model):
     user = models.ForeignKey(
@@ -60,6 +72,8 @@ class Blog(models.Model):
     banner = models.ImageField(upload_to='blog_banners')
     description = RichTextField()
     created_date = models.DateField(auto_now_add=True)
+    district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_blogs', null=True, blank=True)
+    thana = models.ForeignKey(Thana, on_delete=models.CASCADE, related_name='thana_blogs', null=True, blank=True)
 
 
     def __str__(self):

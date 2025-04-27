@@ -50,31 +50,82 @@
                         <textarea class="form-control" name="tags" id="" cols="100" rows="5" placeholder="Enter your comma separated value"> </textarea> 
                         <p class="text-danger py-1">{{form.tags.errors}} </p>
                     </div>
+                   
+
+                    <div class="form-group">
+                        <label for="district">District</label>
+                        <select name="district" id="district" class="form-control">
+                            <option value="">Select District</option>
+                            {% for district in districts %}
+                                <option value="{{ district.id }}">{{ district.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Thana Dropdown -->
+                    <div class="form-group">
+                        <label for="thana">Thana</label>
+                        <select name="thana" id="thana" class="form-control">
+                            <option value="">Select Thana</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                        
                         <button type="submit" class="btn btn-primary btn-block">Add </button>
                     </div>
 
+
                 </form>
             </div>
         </div>
     </div>
+    
 
     
 </section>
+<!-- Add this line in the <head> or before any script tag that uses jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // AJAX Call to fetch Thanas based on District selection
+    $('#district').change(function() {
+        var districtId = $(this).val();  // Get the selected district ID
+        if(districtId) {
+            $.ajax({
+                url: "{% url 'get_thanas' %}",  // AJAX URL to get thanas
+                data: {
+                    'district_id': districtId,
+                },
+                dataType: "json",
+                success: function(data) {
+                    console.log(data); 
+                    var thanaDropdown = $('#thana');
+                    thanaDropdown.empty();  // Clear previous Thana options
+                    thanaDropdown.append('<option value="">Select Thana</option>');
+                    $.each(data.thanas, function(index, thana) {
+                        thanaDropdown.append('<option value="' + thana.id + '">' + thana.name + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('#thana').empty().append('<option value="">Select Thana</option>');
+        }
+    });
+</script>
+
 
 <script>
     document.getElementById('banner-upload').addEventListener('change', function(event) {
-        var reader = new FileReader();  // FileReader তৈরি করছি ছবি পড়ার জন্য
-        reader.onload = function(e) {  // যখন ছবি লোড হবে, তখন এই ফাংশন চলবে
+        var reader = new FileReader();  
+        reader.onload = function(e) {  
             var previewContainer = document.getElementById('image-preview-container');
             var previewImage = document.getElementById('image-preview');
             
-            previewImage.src = e.target.result;  // ছবির প্রিভিউ দেখানো
-            previewContainer.style.display = 'block';  // প্রিভিউ ডিভটি দৃশ্যমান করা
+            previewImage.src = e.target.result; 
+            previewContainer.style.display = 'block'; 
         };
 
-        reader.readAsDataURL(event.target.files[0]);  // ফাইলটি পড়ছি
+        reader.readAsDataURL(event.target.files[0]);  
     });
 </script>
 

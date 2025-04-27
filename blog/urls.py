@@ -13,6 +13,9 @@ urlpatterns = [
     path('search_blogs/', search_blogs, name = 'search_blogs'),
     path('my_blogs/', my_blogs, name= 'my_blogs'),
     path('add_blog/', add_blog, name= 'add_blog'),
+      path('get_thanas/', get_thanas, name='get_thanas'), 
+    
+    
     
 
     

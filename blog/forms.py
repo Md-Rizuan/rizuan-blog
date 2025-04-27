@@ -1,5 +1,5 @@
 from django import forms
-from .models import Blog
+from .models import Blog,District,Thana
 
 from ckeditor.fields import RichTextField
 
@@ -8,12 +8,16 @@ class TextForm(forms.Form):
 
 class AddBlogForm(forms.ModelForm):
     description = RichTextField()
+    district = forms.ModelChoiceField(queryset=District.objects.all(), required=False)
+    thana = forms.ModelChoiceField(queryset=Thana.objects.all(), required=False)
     class Meta:
         model =Blog
         fields =(
             "title",
             "category",
             "banner",
-            "description"
+            "description",
+            "district",
+            "thana",
 
         )
