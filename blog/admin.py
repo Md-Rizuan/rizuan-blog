@@ -11,4 +11,5 @@ admin.site.register(Comment)
 admin.site.register(Reply)
 admin.site.register(District)
 admin.site.register(Thana)
+admin.site.register(Todo)
 

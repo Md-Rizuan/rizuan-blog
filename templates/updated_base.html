@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-menu-styles="gradient" data-header-styles="gradient" data-toggled="close">
+
+<head>
+
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}{% endblock %} | {{app_name}}</title>
+    <meta name="description" content="Department of Films and Publications">
+    <meta name="author" content="MidDayDreams" />
+	<meta name="keywords" content="dfp,MidDayDreams">
+    <meta property="og:title" content="{{DFP}}">
+    <meta property="og:description" content="DFP">
+    <meta property="og:type" content="Website">
+    <meta property="og:site_name" content="{{app_name}}">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="{{static_server}}/img/ctg_range.png" type="image/x-icon">
+    
+    <!-- Choices JS -->
+    <script src="{{static_server}}/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+
+    <!-- Main Theme Js -->
+    <script src="{{static_server}}/js/main.js"></script>
+    
+    <!-- Bootstrap Css -->
+    <link id="style" href="{{static_server}}/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+
+    <!-- Style Css -->
+    <link href="{{static_server}}/css/styles.min.css" rel="stylesheet" >
+
+    <!-- Icons Css -->
+    <link href="{{static_server}}/css/icons.css" rel="stylesheet" >
+
+    <!-- Node Waves Css -->
+    <link href="{{static_server}}/libs/node-waves/waves.min.css" rel="stylesheet" > 
+
+    <!-- Simplebar Css -->
+    <link href="{{static_server}}/libs/simplebar/simplebar.min.css" rel="stylesheet" >
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
+    <!-- date Picker Css -->
+    <link rel="stylesheet" href="{{static_server}}/libs/flatpickr/flatpickr.min.css">
+    <link rel="stylesheet" href="{{static_server}}/libs/@simonwep/pickr/themes/nano.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css">
+    <!-- Choices Css -->
+    <link rel="stylesheet" href="{{static_server}}/libs/choices.js/public/assets/styles/choices.min.css">
+    <link href="{{static_server}}/css/notify.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+    <!-- jQuery Confirm CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- interactive vector maps  -->
+    {% comment %} <link rel="stylesheet" href="{{static_server}}/libs/jsvectormap/css/jsvectormap.min.css"> {% endcomment %}
+
+     <!-- base Css -->
+     <link href="{{static_server}}/css/base.css?v=2" rel="stylesheet" >
+{% block style %}
+<style>
+    .bg-success-notification {
+    
+        background-color: rgba(67, 206, 133, .2) !important;
+        color: rgb(78, 98, 177) !important;
+    }
+    
+</style>
+
+{% endblock %}
+
+
+</head>
+<body>
+    <div class="progress-top-bar"></div>
+
+     <!-- Loader -->
+     <div id="loader" >
+         <img src="{{static_server}}/img/loader.svg" alt="">
+     </div>
+     <!-- Loader -->
+
+    <div class="page">
+         <!-- app-header -->
+         <header class="app-header" style="background: #e5ebff;">
+
+            <!-- Start::main-header-container -->
+            <div class="main-header-container container-fluid">
+
+                <!-- Start::header-content-left -->
+                <div class="header-content-left">
+                    
+                    <!-- Start::header-element -->
+                    <div class="header-element">
+                        <div class="horizontal-logo">
+                            <a href="#" class="header-logo">
+                                <img src="{{static_server}}/img/ctg_range.png" alt="logo">
+                                
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End::header-element -->
+                    <!-- Start::header-element -->
+                    <div class="header-element">
+                        <!-- Start::header-link -->
+                        <a aria-label="Hide Sidebar" class="sidemenu-toggle header-link animated-arrow hor-toggle horizontal-navtoggle" data-bs-toggle="sidebar" href="javascript:void(0);"><span></span></a>
+                        <!-- End::header-link -->
+                    </div>
+                    <!-- End::header-element -->
+
+
+
+                </div>
+                <!-- End::header-content-left -->
+
+                <div class="header-content-middle" style="display: flex; justify-content: center; align-items: center; height: 100%; text-align: center;">
+                    {% comment %}
+                    <div class="header-element">
+                        <a href="{% url 'dashboard:index' %}" class="header-logo">
+                            <img 
+
+                            src="{{static_server}}/img/police_logo.png"  
+                            src="{{static_server}}/img/police.png"
+
+                            src="{{static_server}}/img/ctg_range.png" 
+
+                            alt="logo" style="width: 2.8rem; height: auto; ">
+                        </a>
+                    </div>
+                    {% endcomment %}
+                    <div class="header-element" style="margin-left: 2rem;">
+                        <span style="color: rgba(0, 0, 0, 0.8); font-weight: 600;" class="app_name">  {{ app_name }} </span>
+                    </div>
+                </div>
+
+                <!-- Start::header-content-right -->
+                <div class="header-content-right">
+
+                    <!-- Start::header-element -->
+                    <div class="header-element header-theme-mode d-none">
+                        <!-- Start::header-link|layout-setting -->
+                        <a href="javascript:void(0);" class="header-link layout-setting">
+                            <span class="light-layout">
+                                <!-- Start::header-link-icon -->
+                            <i class="ri-moon-line header-link-icon"></i>
+                                <!-- End::header-link-icon -->
+                            </span>
+                            <span class="dark-layout">
+                                <!-- Start::header-link-icon -->
+                            <i class="ri-sun-line header-link-icon"></i>
+                                <!-- End::header-link-icon -->
+                            </span>
+                        </a>
+                        <!-- End::header-link|layout-setting -->
+                    </div>
+                    <!-- End::header-element -->
+
+                    
+
+                     <!-- Start::header-element -->
+                        <div class="d-flex header-settings notification_btn" id='notification_btn'>
+                            <a  href="javascript:void(0);" class=" header-link nav-link icon me-1 position-relative" data-bs-toggle="offcanvas" data-bs-target="#sidebar-right" aria-controls="sidebar-right" style='color: #fff !important;'>
+                                
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon right-menu__icon me-1" viewBox="0 0 512 512"><path d="M427.68 351.43C402 320 383.87 304 383.87 217.35 383.87 138 343.35 109.73 310 96c-4.43-1.82-8.6-6-9.95-10.55C294.2 65.54 277.8 48 256 48s-38.21 17.55-44 37.47c-1.35 4.6-5.52 8.71-9.95 10.53-33.39 13.75-73.87 41.92-73.87 121.35C128.13 304 110 320 84.32 351.43 73.68 364.45 83 384 101.61 384h308.88c18.51 0 27.77-19.61 17.19-32.57zM320 384v16a64 64 0 01-128 0v-16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
+                                    <span class="pulse"></span>
+                                
+                                <i class="bi bi-bell" style="color: white; font-size: 1.1rem;"></i>
+
+                            </a>
+                        </div>
+                   
+                   <!-- End::header-element -->
+
+                    <!-- Start::header-element -->
+                    <div class="header-element">
+                        <!-- Start::header-link|dropdown-toggle -->
+                        <a href="javascript:void(0);" class="header-link dropdown-toggle" id="mainHeaderProfile" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            <div class="d-flex align-items-center">
+                                <div class="">
+                                    <img src="{{static_server}}/img/user.png" alt="img" width="40" height="40">
+                                </div>
+                            </div>
+                        </a>
+                        <!-- End::header-link|dropdown-toggle -->
+                        <div class="main-header-dropdown dropdown-menu pt-0 overflow-hidden header-profile-dropdown dropdown-menu-end" aria-labelledby="mainHeaderProfile">
+                            <div class="header-dropdown text-fixed-white rounded-top">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-sm-2 me-0 avatar">
+                                        <img src="{{static_server}}/img/user.png" alt="img">
+                                    </div>
+                                    <div class="d-sm-block d-none">
+                                        <p class="fw-semibold mb-0 lh-1">{{request.user.username}}</p>
+                                        <span class="fw-bold d-block fs-12">{{request.user.get_designation_display}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider mb-0"></div>
+
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-0"><a class="dropdown-item d-flex" 
+                                    href="#"
+                                    ><i class="fab fa-edge fs-18 me-2"></i>পাসওয়ার্ড পরিবর্তন</a></li>
+                               
+                                <li class="mb-0"><a class="dropdown-item d-flex" 
+                                    href="#"
+                                    ><i class="ti ti-logout fs-18 me-2"></i>লগ আউট
+                                </a></li>
+                            </ul>
+                            </div>
+                    </div>  
+                    <!-- End::header-element -->
+
+
+                </div>
+                <!-- End::header-content-right -->
+
+            </div>
+            <!-- End::main-header-container -->
+
+        </header>
+        <!-- /app-header -->
+        <!-- Start::app-sidebar -->
+        <aside class="app-sidebar" id="sidebar" style="background: #e5ebff !important;">
+
+            <!-- Start::main-sidebar-header -->
+            <div class="main-sidebar-header">
+                <a href="{% url 'dashboard:index' %}" class="header-logo" style="flex-direction: column;" id="top-client-name">
+                    <img src="{{static_server}}/img/ctg_range.png" alt="logo" class="main-logo desktop-logo"  style="width: 3rem; height: auto;">
+                </a>
+                {% comment %}
+                <a href="{% url 'dashboard:index' %}" id="top-client-name">
+                    <p style="padding-bottom: 0; margin-bottom: 0; font-weight: bold; color: rgba(0, 0, 0, 0.8);">{{ client_name }}</p>
+                </a>
+                {% endcomment %}
+               
+            </div>
+            
+            <!-- End::main-sidebar-header -->
+
+            <!-- Start::main-sidebar -->
+            <div class="main-sidebar " id="sidebar-scroll">
+
+                <!-- Start::nav -->
+                <nav class="main-menu-container nav nav-pills flex-column sub-open">
+                    <div class="slide-left" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24"
+                            height="24" viewBox="0 0 24 24">
+                            <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path>
+                        </svg></div>
+                    <ul class="main-menu">
+                        <li class="slide" style="text-align: center; color: rgba(0, 0, 0, 0.8);" id="welcoming_designation">
+                           <span style="font-weight: 600; font-size: 0.9rem;"> স্বাগতম <br> 
+                            {% if request.user.role == 'DOU' %}
+                                ডেস্ক অফিসার ({{ request.user.district.title }}) 
+                            {% else %}
+                                {{ request.user.get_role_display }}
+                            {% endif %}
+                        </li>
+                        <!-- Start::slide -->
+                        <li class="slide mt-1">
+                            <a href="{% url 'dashboard:index' %}" class="side-menu__item dashboard_menu">
+                                <svg class="ionicon side-menu__icon" viewBox="0 0 512 512"> <title>Home</title> <path d="M80 212v236a16 16 0 0016 16h96V328a24 24 0 0124-24h80a24 24 0 0124 24v136h96a16 16 0 0016-16V212" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path> <path d="M480 256L266.89 52c-5-5.28-16.69-5.34-21.78 0L32 256M400 179V64h-48v69" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path> </svg>
+                                <span class="side-menu__label">ড্যাশবোর্ড</span>
+                                
+                            </a>
+                           
+                        </li>
+                        <!-- End::slide -->
+                        <!-- Start::slide -->
+                        {% if request.user.is_superuser or request.user.role == 'A' %}
+                            <li class="slide  has-sub ">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg class="ionicon side-menu__icon" viewBox="0 0 512 512">
+                                        <title>Setup</title>
+                                        <rect x="64" y="64" width="80" height="80" rx="40" ry="40" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></rect>
+                                        <rect x="216" y="64" width="80" height="80" rx="40" ry="40" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></rect>
+                                        <rect x="368" y="64" width="80" height="80" rx="40" ry="40" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></rect>
+                                        <rect x="64" y="216" width="80" height="80" rx="40" ry="40" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></rect>
+                                        <rect x="216" y="216" width="80" height="80" rx="40" ry="40" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></rect>
+                                        <rect x="368" y="216" width="80" height="80" rx="40" ry="40" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></rect>
+                                        <rect x="64" y="368" width="80" height="80" rx="40" ry="40" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></rect>
+                                        <rect x="216" y="368" width="80" height="80" rx="40" ry="40" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></rect>
+                                        <rect x="368" y="368" width="80" height="80" rx="40" ry="40" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></rect>
+                                    </svg>
+                                    <span class="side-menu__label">সেট-আপ</span>
+                                    <i class="ri ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+                                    <li class="slide side-menu__label1"><a href="javascript:void(0)">Apps</a></li>
+                                    <li class="slide"><a href="{% url 'user:users' %}" class="side-menu__item">ইউজার</a></li>
+                                    <li class="slide"><a href="{% url 'dashboard:setup_district' %}" class="side-menu__item">জেলা</a></li>
+                                    <li class="slide"><a href="{% url 'dashboard:setup_unit_office' %}" class="side-menu__item">সার্কেল</a></li>
+                                    <li class="slide"><a href="{% url 'dashboard:setup_thana' %}" class="side-menu__item"> থানা </a></li>
+                                    <li class="slide"><a href="{% url 'dashboard:setup_investigation_center' %}" class="side-menu__item"> তদন্ত কেন্দ্র </a></li>
+                                    <li class="slide"><a href="{% url 'dashboard:setup_outpost' %}" class="side-menu__item"> ফাঁড়ি </a></li>
+                                    <li class="slide"><a href="{% url 'dashboard:camp_setup' %}" class="side-menu__item">ক্যাম্প</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+
+                            <li class="slide has-sub complete_posting_menu">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg class="ionicon side-menu__icon" viewBox="0 0 512 512"> 
+                                        <title>পদায়ন </title> 
+                                        <path d="M448 341.37V170.61A32 32 0 00432.11 143l-152-88.46a47.94 47.94 0 00-48.24 0L79.89 143A32 32 0 0064 170.61v170.76A32 32 0 0079.89 369l152 88.46a48 48 0 0048.24 0l152-88.46A32 32 0 00448 341.37z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path> 
+                                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M69 153.99l187 110 187-110M256 463.99v-200"></path> 
+                                    </svg>
+                                    <span class="side-menu__label">পদায়ন </span>
+                                    <i class="ri ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+                                    <li class="slide side-menu__label1"><a href="javascript:void(0)">Apps</a></li>
+                                        <li class="slide new_posting_info">
+                                            <a href="{% url 'dashboard:new_posting_info' %}" class="side-menu__item new_posting_order_info">নতুন পদায়ন তালিকা
+                                            {% if request.user.role == 'ADIGA' or request.user.role == 'DIG' %}
+                                               
+                                                    {% if not count == '০০'%}
+                                                    <span class="badge  rounded-pill header-icon-badge" id="cart-icon-badge" style="height: 1.5rem;">{{ count }}</span>
+                                                        
+                                                    </span>
+                                                    
+                                                
+                                            {% endif %}
+                                        </a></li>
+                                    {% endif %}
+
+                                    {% if request.user.role == 'ADIGA' %}
+                                        <li class="slide current_posting_order_information">
+                                            <a href="{% url 'dashboard:current_posting_order_information' %}" class="side-menu__item current_posting_order_information">চলমান পদায়ন তালিকা </a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if request.user.is_superuser or request.user.role == 'DOI' or request.user.role == 'DOC' or request.user.role == 'ADIGA' or request.user.role == 'DIG' %}
+                                        <li class="slide approved_posting_order_information">
+                                            <a href="{% url 'dashboard:approved_posting_order_information' %}" class="side-menu__item approved_posting_order_information">অনুমোদিত পদায়ন তালিকা </a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if request.user.role == 'DOU' %}
+                                        <li class="slide all_new_posting_information d-flex">
+                                            <a href="{% url 'dashboard:all_new_posting_information' %}" class="side-menu__item all_new_posting_information">নতুন পদায়ন তালিকা</a>
+                                           
+                                                {% if not count == '০০'%}
+                                                <span class="badge  rounded-pill header-icon-badge" id="cart-icon-badge" style="height: 1.5rem;">{{ count }}</span>
+                                                    
+                                                </span>
+                                            
+                                           
+                                        </li>
+
+                                        {% comment %}
+                                        {% if request.user.is_superuser or request.user.role == 'DOU' %}
+                                        <li class="slide current_new_posting_information d-flex">
+                                            <a href="{% url 'dashboard:current_new_posting_information' %}" class="side-menu__item current_new_posting_information">চলমান পদায়ন তালিকা</a>
+                                        </li>
+                                        {% endif %}
+                                        {% endcomment %}
+
+                                        {% if request.user.is_superuser or request.user.role == 'DOU' %}
+                                        <li class="slide approved_new_posting_information d-flex">
+                                            <a href="{% url 'dashboard:approved_new_posting_information' %}" class="side-menu__item approved_new_posting_information">অনুমোদিত পদায়ন তালিকা</a>
+                                        </li>
+                                        {% endif %}
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                        {% if request.user.is_superuser or request.user.role == 'DOI' or request.user.role == 'DOC' or request.user.role == 'ADIGA' or request.user.role == 'DIG' or request.user.role == 'DOU' or request.user.role == 'A' %}
+                            <li class="slide">
+                                <a href="{% url 'dashboard:officer_list' %}" class="side-menu__item officer_lists">
+                                    <i class="fa fa-users pe-2"></i> 
+                                    <span class="side-menu__label">কর্মকর্তা / কর্মচারীর তালিকা</span>
+                                </a>
+                            </li>
+
+                            {% comment %}
+
+                            <li class="slide existing_officer_lists_slide">
+                                <a href="{% url 'dashboard:existing_officers' %}" class="side-menu__item existing_officer_lists">
+                                    <i class="fa fa-users pe-2"></i> 
+                                    <span class="side-menu__label"> বর্তমান কর্মকর্তার তালিকা </span>
+                                </a>
+                            </li>
+
+                            {% endcomment %}
+
+                            <li class="slide"><a href="{% url 'dashboard:bcs_officer_list' %}" class="side-menu__item bcs_officer_list">
+
+                                <i class="mdi mdi-account-multiple pe-2"></i>
+                                <span class="side-menu__label">বিসিএস কর্মকর্তার তালিকা</span> </a>
+                            </li>
+                        {% endif %}
+
+
+                        {% if request.user.is_superuser or request.user.role == 'A' %}
+                            <li class="slide  has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg class="ionicon side-menu__icon" viewBox="0 0 512 512"> 
+                                        <title>ব্যাকআপ-লগ</title> <rect x="64" y="176" width="384" height="256" rx="28.87" ry="28.87" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32"></rect> 
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M144 80h224M112 128h288"></path> 
+                                    </svg>
+                                    <span class="side-menu__label">ব্যাকআপ-লগ</span>
+                                    <i class="ri ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+                                    <li class="slide side-menu__label1"><a href="javascript:void(0)">Apps</a></li>
+                                    <li class="slide"><a href="{% url 'backup_log:dbbackup' %}" class="side-menu__item">ডাটা ব্যাকআপ</a></li>
+                                    <li class="slide"><a href="{% url 'backup_log:activity-log' %}" class="side-menu__item">কার্য বিবরণ</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                        
+                    </ul>
+                    <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24"
+                            height="24" viewBox="0 0 24 24">
+                            <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
+                        </svg></div>
+                </nav>
+                <!-- End::nav -->
+
+            </div>
+            <!-- End::main-sidebar -->
+
+        </aside>
+        <!-- End::app-sidebar -->
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid mt-4">
+
+                {% block main_content %}
+					
+                {% endblock %}
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        <!-- Footer Start -->
+        <footer class="footer mt-auto py-3 text-center">
+            <div class="container">
+                
+            </div>
+        </footer>
+        <!-- Footer End -->
+        <!-- Sidebar-right -->
+        <div class="sidebar offcanvas offcanvas-end" tabindex="-1" id="sidebar-right">
+            <div class="offcanvas-header border-bottom border-block-end-dashed"> <h5 class="offcanvas-title" id="offcanvasRightLabel1">নোটিফিকেশন</h5> <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> </div>
+            <div class="offcanvas-body p-0">
+        				
+                <div class="p-0 border-0 notification_content" id="side1">
+                    
+                </div>
+        											
+            </div>
+        </div> 
+        <!--/Sidebar-right-->
+
+        <!-- Message Modal -->
+        <div class="modal fade" id="chatModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-dialog-right chatbox" role="document">
+                <div class="modal-content chat radius-7 border-0">
+                    <div class="card overflow-hidden mb-0 border-0">
+                        <!-- action-header -->
+                        <div class="action-header clearfix flex-between">
+                            <div class="float-start hidden-xs d-flex align-items-center flex-1">
+                                <div class="avatar avatar-md rounded-circle">
+                                    <img  class="rounded-circle" alt="img">
+                                </div>
+                                <div class="ms-2 mt-0">
+                                    <p class="fs-20 text-dark mb-0 fw-medium">Sarah Syd</p>
+                                    <span class="me-3 text-dark fs-11 op-8">active now</span>
+                                </div>
+                            </div>
+                            <div class="btn-list">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-def white" data-bs-toggle="modal" data-bs-target="#audioModal"><i class="fe fe-phone"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-sm btn-def white" data-bs-toggle="modal" data-bs-target="#videoModal"><i class="fe fe-video"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-sm btn-def white" data-bs-toggle="dropdown" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0)" class="dropdown-item"><i class="fe fe-user me-1"></i> View profile</a></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item"><i class="fe fe-user-plus me-1"></i>Add friends</a></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item"><i class="fe fe-plus me-1"></i> Add to group</a></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item"><i class="fe fe-minus me-1"></i> Clear chat</a></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item"><i class="fe fe-slash me-1"></i> Block</a></li>
+                                </ul>
+                                <a href="javascript:void(0)" class="btn btn-sm btn-def white" data-bs-dismiss="modal"><i class="fe fe-x-circle"></i></a>
+                            </div>
+                        </div>
+                        <!-- action-header end -->
+
+                        <!-- msg_card_body -->
+                        <div class="card-body msg_card_body">
+                            <div class="chat-box-single-line">
+                                <span class="timestamp">Today</span>
+                            </div>
+                            <div class="d-flex justify-content-start chat_block">
+                                <div class="me-1 d-flex align-items-end">
+                                    <div class="avatar avatar-sm">
+                                        <img  class="rounded-circle" alt="img">
+                                    </div>
+                                </div>
+                                <div class="msg_block">
+                                    <div class="msg_container">
+                                        <div class="msg_cotainer-main">
+                                            <span>Hi there! How are you?</span>
+                                        </div>
+                                        <span class="fs-10 text-muted msg_time">8:10 AM</span>
+                                    </div>
+                                    <div class="msg_container">
+                                        <div class="msg_cotainer-main">
+                                            <span> Hey I'm Waiting for your reply.</span>
+                                        </div>
+                                        <div class="msg_cotainer-main">
+                                            <span>I've to go to outside....</span>
+                                        </div>
+                                        <span class="fs-10 text-muted msg_time">8:35 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end chat_block">
+                                <div class="msg_block_send">
+                                    <div class="msg_container_send">
+                                        <div class="msg_cotainer_send-main">
+                                            <span>Hi, I am coming there in few minutes. Please wait!</span>
+                                        </div>
+                                        <span class="msg_time_send">8:38 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-start chat_block">
+                                <div class="me-1 d-flex align-items-end">
+                                    <div class="avatar avatar-sm">
+                                        <img  class="rounded-circle" alt="img">
+                                    </div>
+                                </div>
+                                <div class="msg_block">
+                                    <div class="msg_container">
+                                        <div class="msg_cotainer-main">
+                                            <span>Ok Thanks!</span>
+                                        </div>
+                                        <div class="msg_cotainer-main">
+                                            <span>I'm waiting for your message.</span>
+                                        </div>
+                                        <span class="fs-10 text-muted msg_time">8:39 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end chat_block">
+                                <div class="msg_block_send">
+                                    <div class="msg_container_send">
+                                        <div class="msg_cotainer_send-main">
+                                            <span>Hey, I am at Coffee shop you said</span>
+                                        </div>
+                                        <div class="msg_cotainer_send-main">
+                                            <span>I can't see you here.</span>
+                                        </div>
+                                        <div class="msg_cotainer_send-main">
+                                            <div class="d-flex align-items-center">
+                                                <a href="javascript:void(0)" class="btn btn-sm btn-def white"><i class="fe fe-play-circle"></i></a>
+                                                <span class="mx-2">
+                                                    <svg  width="20" height="20"><defs></defs><g  transform="matrix(1,0,0,1,0,0)"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 3" viewBox="0 0 24 24" width="20" height="20"><path d="M6 19a1 1 0 0 1-1-1V6A1 1 0 0 1 7 6V18A1 1 0 0 1 6 19zM12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 12 18zM9 21a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0V20A1 1 0 0 1 9 21zM3 17a1 1 0 0 1-1-1V8A1 1 0 0 1 4 8v8A1 1 0 0 1 3 17zM21 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 21 16zM15 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 15 16zM18 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 18 18z" fill="#7987a1" class="color000 svgShape"></path></svg></g></svg>
+                                                    <svg  class="chat_audio" width="20" height="20"><defs></defs><g  transform="matrix(1,0,0,1,0,0)"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 3" viewBox="0 0 24 24" width="20" height="20"><path d="M6 19a1 1 0 0 1-1-1V6A1 1 0 0 1 7 6V18A1 1 0 0 1 6 19zM12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 12 18zM9 21a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0V20A1 1 0 0 1 9 21zM3 17a1 1 0 0 1-1-1V8A1 1 0 0 1 4 8v8A1 1 0 0 1 3 17zM21 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 21 16zM15 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 15 16zM18 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 18 18z" fill="#7987a1" class="color000 svgShape"></path></svg></g></svg>
+                                                    <svg  class="chat_audio" width="20" height="20"><defs></defs><g  transform="matrix(1,0,0,1,0,0)"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 3" viewBox="0 0 24 24" width="20" height="20"><path d="M6 19a1 1 0 0 1-1-1V6A1 1 0 0 1 7 6V18A1 1 0 0 1 6 19zM12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 12 18zM9 21a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0V20A1 1 0 0 1 9 21zM3 17a1 1 0 0 1-1-1V8A1 1 0 0 1 4 8v8A1 1 0 0 1 3 17zM21 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 21 16zM15 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 15 16zM18 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 18 18z" fill="#7987a1" class="color000 svgShape"></path></svg></g></svg>
+                                                    <svg  class="chat_audio" width="20" height="20"><defs></defs><g  transform="matrix(1,0,0,1,0,0)"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 3" viewBox="0 0 24 24" width="20" height="20"><path d="M6 19a1 1 0 0 1-1-1V6A1 1 0 0 1 7 6V18A1 1 0 0 1 6 19zM12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 12 18zM9 21a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0V20A1 1 0 0 1 9 21zM3 17a1 1 0 0 1-1-1V8A1 1 0 0 1 4 8v8A1 1 0 0 1 3 17zM21 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 21 16zM15 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 15 16zM18 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 18 18z" fill="#7987a1" class="color000 svgShape"></path></svg></g></svg>
+                                                    <svg  class="chat_audio" width="20" height="20"><defs></defs><g  transform="matrix(1,0,0,1,0,0)"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 3" viewBox="0 0 24 24" width="20" height="20"><path d="M6 19a1 1 0 0 1-1-1V6A1 1 0 0 1 7 6V18A1 1 0 0 1 6 19zM12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 12 18zM9 21a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0V20A1 1 0 0 1 9 21zM3 17a1 1 0 0 1-1-1V8A1 1 0 0 1 4 8v8A1 1 0 0 1 3 17zM21 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 21 16zM15 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 15 16zM18 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 18 18z" fill="#7987a1" class="color000 svgShape"></path></svg></g></svg>
+                                                    <svg  class="chat_audio" width="20" height="20"><defs></defs><g  transform="matrix(1,0,0,1,0,0)"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 3" viewBox="0 0 24 24" width="20" height="20"><path d="M6 19a1 1 0 0 1-1-1V6A1 1 0 0 1 7 6V18A1 1 0 0 1 6 19zM12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 12 18zM9 21a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0V20A1 1 0 0 1 9 21zM3 17a1 1 0 0 1-1-1V8A1 1 0 0 1 4 8v8A1 1 0 0 1 3 17zM21 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 21 16zM15 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 15 16zM18 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 18 18z" fill="#7987a1" class="color000 svgShape"></path></svg></g></svg>
+                                                    <svg  class="chat_audio" width="20" height="20"><defs></defs><g  transform="matrix(1,0,0,1,0,0)"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 3" viewBox="0 0 24 24" width="20" height="20"><path d="M6 19a1 1 0 0 1-1-1V6A1 1 0 0 1 7 6V18A1 1 0 0 1 6 19zM12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 12 18zM9 21a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0V20A1 1 0 0 1 9 21zM3 17a1 1 0 0 1-1-1V8A1 1 0 0 1 4 8v8A1 1 0 0 1 3 17zM21 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 21 16zM15 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 15 16zM18 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 18 18z" fill="#7987a1" class="color000 svgShape"></path></svg></g></svg>
+                                                    <svg  class="chat_audio" width="20" height="20"><defs></defs><g  transform="matrix(1,0,0,1,0,0)"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 3" viewBox="0 0 24 24" width="20" height="20"><path d="M6 19a1 1 0 0 1-1-1V6A1 1 0 0 1 7 6V18A1 1 0 0 1 6 19zM12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 12 18zM9 21a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0V20A1 1 0 0 1 9 21zM3 17a1 1 0 0 1-1-1V8A1 1 0 0 1 4 8v8A1 1 0 0 1 3 17zM21 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 21 16zM15 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 15 16zM18 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 18 18z" fill="#7987a1" class="color000 svgShape"></path></svg></g></svg>
+                                                    <svg  class="chat_audio" width="20" height="20"><defs></defs><g  transform="matrix(1,0,0,1,0,0)"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 3" viewBox="0 0 24 24" width="20" height="20"><path d="M6 19a1 1 0 0 1-1-1V6A1 1 0 0 1 7 6V18A1 1 0 0 1 6 19zM12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 12 18zM9 21a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0V20A1 1 0 0 1 9 21zM3 17a1 1 0 0 1-1-1V8A1 1 0 0 1 4 8v8A1 1 0 0 1 3 17zM21 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 21 16zM15 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 15 16zM18 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 18 18z" fill="#7987a1" class="color000 svgShape"></path></svg></g></svg>
+                                                    <svg  class="chat_audio" width="20" height="20"><defs></defs><g  transform="matrix(1,0,0,1,0,0)"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 3" viewBox="0 0 24 24" width="20" height="20"><path d="M6 19a1 1 0 0 1-1-1V6A1 1 0 0 1 7 6V18A1 1 0 0 1 6 19zM12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 12 18zM9 21a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0V20A1 1 0 0 1 9 21zM3 17a1 1 0 0 1-1-1V8A1 1 0 0 1 4 8v8A1 1 0 0 1 3 17zM21 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 21 16zM15 16a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6A1 1 0 0 1 15 16zM18 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0V17A1 1 0 0 1 18 18z" fill="#7987a1" class="color000 svgShape"></path></svg></g></svg>
+                                                </span>
+                                                <a href="javascript:void(0)" class="btn btn-sm btn-def white"><i class="fe fe-download"></i></a>
+                                            </div>
+                                        </div>
+                                        <span class="msg_time_send">9:15 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-start chat_block">
+                                <div class="me-1 d-flex align-items-end">
+                                    <div class="avatar avatar-sm">
+                                        <img  class="rounded-circle" alt="img">
+                                    </div>
+                                </div>
+                                <div class="msg_block">
+                                    <div class="msg_container">
+                                        <div class="msg_cotainer-main">
+                                            <span>I just went to vegetable store.</span>
+                                        </div>
+                                        <div class="msg_cotainer-main">
+                                            <span>You can come here or wait for just 5 min</span>
+                                        </div>
+                                        <span class="fs-10 text-muted msg_time">9:15 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end chat_block">
+                                <div class="msg_block_send">
+                                    <div class="msg_container_send">
+                                        <div class="msg_cotainer_send-main">
+                                            <span>Ok then I'll wait...</span>
+                                        </div>
+                                        <div class="msg_cotainer_send-main">
+                                            <span>just call me or come inside to coffee shop when you came by</span>
+                                        </div>
+                                        <span class="msg_time_send">9:15 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-start chat_block">
+                                <div class="me-1 d-flex align-items-end">
+                                    <div class="avatar avatar-sm">
+                                        <img  class="rounded-circle" alt="img">
+                                    </div>
+                                </div>
+                                <div class="msg_block">
+                                    <div class="msg_container">
+                                        <div class="msg_cotainer-main">
+                                            <span>Deal... Bye</span>
+                                        </div>
+                                        <div class="msg_cotainer-main">
+                                            <span>Enjoy your coffee</span>
+                                        </div>
+                                        <span class="fs-10 text-muted msg_time">9:16 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end chat_block">
+                                <div class="msg_block_send">
+                                    <div class="msg_container_send">
+                                        <div class="msg_cotainer_send-main">
+                                            <span>Definitely and Bye...</span>
+                                        </div>
+                                        <span class="msg_time_send">9:17 AM</span>
+                                    </div>
+                                    <div class="msg_container_send">
+                                        <div class="msg_cotainer_send-main media-files">
+                                            <img src="{{static_server}}/img/media/23.jpg" alt="img">
+                                        </div>
+                                        <span class="msg_time_send">9:30 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-start chat_block">
+                                <div class="me-1 d-flex align-items-end">
+                                    <div class="avatar avatar-sm">
+                                        <img  class="rounded-circle" alt="img">
+                                    </div>
+                                </div>
+                                <div class="msg_block">
+                                    <div class="msg_container">
+                                        <div class="msg_cotainer-main">
+                                            <span>I'm in coffee shop..</span>
+                                        </div>
+                                        <span class="fs-10 text-muted msg_time">9:45 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end chat_block">
+                                <div class="msg_block_send">
+                                    <div class="msg_container_send">
+                                        <div class="msg_cotainer_send-main">
+                                            <span>come to 8th number table</span>
+                                        </div>
+                                        <span class="msg_time_send">9:46 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-start chat_block">
+                                <div class="me-1 d-flex align-items-end">
+                                    <div class="avatar avatar-sm">
+                                        <img  class="rounded-circle" alt="img">
+                                    </div>
+                                </div>
+                                <div class="msg_block">
+                                    <div class="msg_container">
+                                        <div class="msg_cotainer-main">
+                                            <span>Ok.. coming...</span>
+                                        </div>
+                                        <span class="fs-10 text-muted msg_time">9:46 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- msg_card_body end -->
+
+                        <!-- card-footer -->
+                        <div class="card-footer">
+                            <div class="form-group mb-0 d-flex">
+                                <div class="input-group pos-relative">
+                                    <input type="text" class="form-control radius-4" placeholder="Type something here...">
+                                    <div class="chat_input_icons">
+                                        <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="emoji"><i class="ti-face-smile"></i></a>
+                                        <a href="javascript:void(0)" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="attach files"><i class="fe fe-paperclip"></i></a>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary rounded-circle ms-2">
+                                    <i class="far fa-paper-plane" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div><!-- card-footer end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /modal -->
+        <div id="fileModal" class="modal fade show_file_modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">File Preview</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal to show history -->
+        <div class="modal fade" id="applicationHistoryModal"  tabindex="-1" role="dialog">
+            <div class="modal-dialog  modal-dialog-center modal-dialog-scrollable modal-lg  " role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title common_page_title">আবেদনের বৃত্তান্ত</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body history_content">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark text-white close_button" data-bs-dismiss="modal" aria-label="Close">বন্ধ করুন</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal to show remarks -->
+        <div id="remarksModal" class="remarksModal modal fade" tabindex="-1" role="dialog"></div>
+
+
+        <!-- Date & Time Picker JS -->
+        <script src="{{static_server}}/libs/flatpickr/flatpickr.min.js"></script>
+        <script src="{{static_server}}/js/date&time_pickers.js?v=1"></script>
+
+    </div>
+
+
+
+    <!-- Scroll To Top -->
+    <div class="scrollToTop">
+        <span class="arrow"><i class="las la-arrow-up fs-20"></i></span>
+    </div>
+    <div id="responsive-overlay"></div>
+    <!-- Scroll To Top -->
+
+    <!-- Popper JS -->
+    <script src="{{static_server}}/libs/@popperjs/core/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="{{static_server}}/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Defaultmenu JS -->
+    <script src="{{static_server}}/js/defaultmenu.min.js"></script>
+
+    <!-- Node Waves JS-->
+    <script src="{{static_server}}/libs/node-waves/waves.min.js"></script>
+
+    <!-- Sticky JS -->
+    <script src="{{static_server}}/js/sticky.js"></script>
+
+    <!-- Simplebar JS -->
+    <script src="{{static_server}}/libs/simplebar/simplebar.min.js"></script>
+    <script src="{{static_server}}/js/simplebar.js"></script>
+   
+    <!-- Color Picker JS -->
+    <script src="{{static_server}}/libs/@simonwep/pickr/pickr.es5.min.js"></script> 
+
+    <script src="{{static_server}}/js/jquery.min.js"></script>
+  
+    <!-- Custom-Switcher JS -->
+    {% comment %} <script src="{{static_server}}/js/custom-switcher.min.js"></script> {% endcomment %}
+    <script src="{{static_server}}/js/notify.js"></script>
+    <!-- jQuery Confirm JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
+    <!-- jQuery UI after jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Internal Select-2.js -->
+   <!-- Datatables Cdn -->
+   <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+   <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+   <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+   <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+   <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.6/pdfmake.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+   <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="{{static_server}}/js/datatables.js?v=1"></script>
+    <!-- Custom JS -->
+    <script src="{{static_server}}/js/custom.js"></script>
+    <!-- Select2 Cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="{{static_server}}/js/select2.js"></script>
+    <script src="{{static_server}}/js/base.js?v=5"></script>
+    <script>
+        $(document).ready(function () {
+              
+			$(document).on('click', ".notification_btn", function () {
+				
+				let loaderHtml = '<h2 class="modalHeading d-flex justify-content-center"><span class="pt-4">লোড হচ্ছে</span> &nbsp;<img src="{{static_server}}/img/loader.svg" /></h2>';
+				$(".notification_content").html(loaderHtml);
+				$.ajax({
+					url: "{% url 'dashboard:get_notification' %}",
+					method: "GET",
+					success: function (data) {
+						if (!data.hasOwnProperty("message")) {
+							$(".notification_content").html(data);
+							
+						} else {
+							errorMessage("দুঃখিত, কোন ভুল সংঘটিত হয়েছে");
+						}
+					},
+					error: function (e) {
+						errorMessage("দুঃখিত, কোন ভুল সংঘটিত হয়েছে");
+					}
+				});
+			});
+
+            $(document).on("click", ".read-more", function () {
+                const fullMessage = $(this).data('message');
+                $(this).parent().text("মন্তব্য: " + fullMessage);
+            });
+		});
+    </script>
+	
+	{% block script %}
+    
+	
+	{% endblock %}
+
+</body>
+
+</html>

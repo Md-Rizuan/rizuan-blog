@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add Todo</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h2 class="mb-4">Add Todo</h2>
+
+    <form id="todoForm">
+      <div class="mb-3">
+        <label for="title" class="form-label">Todo Title</label>
+        <input type="text" class="form-control" id="title" placeholder="Enter title">
+      </div>
+      <div class="mb-3">
+        <label for="deadline" class="form-label">Deadline</label>
+        <input type="text" class="form-control" id="deadline">
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" rows="3" placeholder="Enter description"></textarea>
+      </div>
+
+      <button type="button" class="btn btn-primary submit_button">Submit</button>
+    </form>
+
+    <h3 class="mt-5">Todo List</h3>
+    <table class="table table-striped mt-3" id="todoTable">
+      <thead class="table-dark">
+        <tr>
+          <th>Title</th>
+          <th>Deadline</th>
+          <th>Description</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for todo in todos %}
+        <tr id=todo-{{todo.id}}>
+        <td>{{todo.title}}</td>
+        <td>{{todo.deadline}}</td>
+        <td>{{todo.description}}</td>
+        <td>
+            <button class="btn btn-sm btn-warning edit-btn" data-id="{{ todo.id }}">Edit</button>
+            <button class="btn btn-sm btn-danger delete-btn" data-id="{{ todo.id }}">Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <!-- Modal for Edit Todo -->
+<div class="modal" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edit Todo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editTodoForm">
+            <div class="mb-3">
+              <label for="editTitle" class="form-label">Title</label>
+              <input type="text" class="form-control" id="editTitle" required>
+            </div>
+            <div class="mb-3">
+              <label for="editDeadline" class="form-label">Deadline</label>
+              <input type="text" class="form-control" id="editDeadline" required>
+            </div>
+            <div class="mb-3">
+              <label for="editDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="editDescription" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+    
+  </div>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+  <!-- Ajax Script -->
+  <script>
+    $(document).ready(function() {
+      $(".submit_button").click(function(e) {
+        e.preventDefault();
+
+        // Get values from the input fields
+        const title = $("#title").val();
+        const deadline = $("#deadline").val();
+        const description = $("#description").val();
+
+        $.ajax({
+          type: "POST",
+          url : "{% url 'add_todo' %}",
+          data: {
+            'title': title,
+            'deadline': deadline,
+            'description': description,
+            'csrfmiddlewaretoken': '{{csrf_token}}'
+          },
+          success: function(response) {
+            console.log("Data sent Successfully");
+          },
+          error: function(error) {
+            console.log('Error:', error);
+          }
+        });
+      });
+    });
+
+
+    $(document).ready(function() {
+        // When Edit button is clicked
+        $(".edit-btn").click(function() {
+          const todoId = $(this).data("id");
+          const title = $(this).data("title");
+          const deadline = $(this).data("deadline");
+          const description = $(this).data("description");
+          
+      
+          // Fill the form with the current values
+          $("#editTitle").val(title);
+          $("#editDeadline").val(deadline);
+          $("#editDescription").val(description);
+
+          $("#editModal").modal('show');
+
+          $("#editTodoForm").submit(function(event) {
+            event.preventDefault(); // Prevent form submission (default)
+      
+            const updatedTitle = $("#editTitle").val();
+            const updatedDeadline = $("#editDeadline").val();
+            const updatedDescription = $("#editDescription").val();
+          
+
+
+        });
+    });
+        
+});
+</script>
+
+</body>
+</html>

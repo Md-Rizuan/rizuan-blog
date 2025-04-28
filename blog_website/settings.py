@@ -82,10 +82,15 @@ WSGI_APPLICATION = 'blog_website.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'rizuan-blog',
+        'USER': 'postgres',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',  # যদি local machine এ run করেন
+        'PORT': '5432',        # PostgreSQL এর default port
     }
 }
+
 
 
 # Password validation

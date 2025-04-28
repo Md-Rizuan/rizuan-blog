@@ -1,0 +1,474 @@
+{% extends "base_updated.html" %}
+{% block title %}
+	ড্যাশবোর্ড
+{% endblock %}
+{% load bangla_digits %}
+{% block style %}
+<style>
+.apexcharts-series path:hover {
+    fill: #587aeb !important;
+}
+
+
+</style>
+{% endblock %}
+
+{% block main_content %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 d-block d-sm-none mb-3 text-center">
+                <div class="flex-1" style="margin-top: 0.5rem;">
+                    <h4 class="text-center"> স্বাগতম, {{ request.user.get_role_display }} </h4>
+                </div>
+            </div>
+                
+            {% if request.user.is_superuser or  request.user.role == 'DIG' or request.user.role == 'DOU' %}
+                <div class="col-xl-4 col-lg-4 notification_btn" style="cursor: pointer;" data-bs-toggle="offcanvas" data-bs-target="#sidebar-right" aria-controls="sidebar-right">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <div class="avatar radius-4 bg-primary-transparent">
+                                        <i class="fa fa-users text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-1">
+                                        <p class="mb-0" style="font-size: 1rem;"> অপেক্ষমান নোটিফিকেশন </p>
+                                    </div>
+                                    <div class="flex-between">
+                                        {{pending_transfer|convert_bangla_digits}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if request.user.is_superuser or request.user.role == 'DOI' or request.user.role == 'DOC' or request.user.role == 'ADIGA' or request.user.role == 'DIG' or request.user.role == 'DOU' or request.user.role == 'A' %}
+                <div class="col-xl-4 col-lg-4" onclick="window.location.href='{% url 'dashboard:bcs_officer_list' %}'"
+                    style="cursor: pointer;">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <div class="avatar radius-4 bg-primary-transparent">
+                                        <i class="fa fa-users text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-1">
+                                        <p class="mb-0" style="font-size: 1rem;"> বিসিএস কর্মকর্তা </p>
+                                    </div>
+                                    <div class="flex-between">
+                                        {{total_bcs_officer|convert_bangla_digits}} জন
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if request.user.role == 'DOI' or request.user.role == 'DOC' or request.user.role == 'ADIGA' or request.user.role == 'DIG' %}
+                <div class="col-xl-4 col-lg-4" onclick="window.location.href='{% url 'dashboard:new_posting_info' %}'"
+                    style="cursor: pointer;">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <div class="avatar radius-4 bg-primary-transparent">
+                                        <i class="fa fa-users text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-1">
+                                        <p class="mb-0" style="font-size: 1rem;"> অননুমোদিত পদায়ন তালিকা </p>
+                                    </div>
+                                    <div class="flex-between">
+                                        {% with request.user|new_application_count as count %}
+                                            {% if not count == '০০' %}
+                                                <p class="fw-medium fs-16 mb-0 numberfont" style="font-size: 0.9rem !important;">
+                                                    {{ count }}
+                                                </p>
+                                            {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4" onclick="window.location.href='{% url 'dashboard:approved_posting_order_information' %}'"
+                    style="cursor: pointer;">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <div class="avatar radius-4 bg-primary-transparent">
+                                        <i class="fa fa-users text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-1">
+                                        <p class="mb-0" style="font-size: 1rem;"> অনুমোদিত পদায়ন তালিকা </p>
+                                    </div>
+                                    <div class="flex-between">
+                                        {% with request.user|new_approved_application_count as count %}
+                                            {% if not count == '০০' %}
+                                                <p class="fw-medium fs-16 mb-0 numberfont" style="font-size: 0.9rem !important;">
+                                                    {{ count }}
+                                                </p>
+                                            {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if request.user.role == 'DOU' %}
+                <div class="col-xl-4 col-lg-4" onclick="window.location.href='{% url 'dashboard:all_new_posting_information' %}'"
+                    style="cursor: pointer;">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <div class="avatar radius-4 bg-primary-transparent">
+                                        <i class="fa fa-users text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-1">
+                                        <p class="mb-0" style="font-size: 1rem;"> অননুমোদিত পদায়ন তালিকা </p>
+                                    </div>
+                                    <div class="flex-between">
+                                        {% with request.user|new_application_count as count %}
+                                            {% if not count == '০০' %}
+                                                <p class="fw-medium fs-16 mb-0 numberfont" style="font-size: 0.9rem !important;">
+                                                    {{ count }}
+                                                </p>
+                                            {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-4" onclick="window.location.href='{% url 'dashboard:approved_new_posting_information' %}'"
+                    style="cursor: pointer;">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <div class="avatar radius-4 bg-primary-transparent">
+                                        <i class="fa fa-users text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-1">
+                                        <p class="mb-0" style="font-size: 1rem;"> অনুমোদিত পদায়ন তালিকা </p>
+                                    </div>
+                                    <div class="flex-between">
+                                        {% with request.user|new_approved_application_count as count %}
+                                            {% if not count == '০০' %}
+                                                <p class="fw-medium fs-16 mb-0 numberfont" style="font-size: 0.9rem !important;">
+                                                    {{ count }}
+                                                </p>
+                                            {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            
+            
+
+            {% if request.user.is_superuser or request.user.role == 'DIG' or request.user.role == 'ADIGC' or request.user.role == 'ADIGA' or request.user.role == 'A' %}
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <div class="avatar radius-4 bg-primary-transparent">
+                                        <i class="fa fa-users text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    
+                                    <div class="mb-1">
+                                        <p class="mb-0" style="font-size: 1rem;"> অনুমোদিত পুলিশ অফিসার </p>
+                                    </div>
+                                    <div class="flex-between">
+                                        <p class="fw-medium fs-16 mb-0 numberfont" style="font-size: 0.9rem !important;"> {{ total_police_in_chittagong|convert_bangla_digits }} জন </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <div class="avatar radius-4 bg-primary-transparent">
+                                        <i class="fa fa-users text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    
+                                    <div class="mb-1">
+                                        <p class="mb-0" style="font-size: 1rem;">  কর্মরত পুলিশ অফিসার </p>
+                                    </div>
+                                    <div class="flex-between">
+                                        <p class="fw-medium fs-16 mb-0 numberfont" style="font-size: 0.9rem !important;"> {{ on_duty_police_officer_count|convert_bangla_digits }} জন </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <br/>
+                    <br/>
+                    <div class="row start-top-card justify-content-center">
+                        <div class="col-12">
+                            <div id="district_wise_officer"></div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endif %}
+                {% comment %}
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <div class="avatar radius-4 bg-primary-transparent">
+                                        <i class="fa fa-wallet text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    
+                                    <div class="mb-1">
+                                        <p class="mb-0">নামের ছাড়পত্রের আবেদন </p>
+                                    </div>
+                                    <div class="flex-between">
+                                        <p class="fw-medium fs-16 mb-0 numberfont"> টি</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <div class="avatar radius-4 bg-primary-transparent">
+                                        <i class="fa fa-users text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    
+                                    <div class="mb-1">
+                                        <p class="mb-0">নামের ছাড়পত্রের আবেদন (চলমান) </p>
+                                    </div>
+                                    <div class="flex-between">
+                                        <p class="fw-medium fs-16 mb-0 numberfont">টি</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <div class="avatar radius-4 bg-warning-transparent">
+                                        <i class="fa fa-user-minus text-warning"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    
+                                    <div class="mb-1">
+                                        <p class="mb-0">নামের ছাড়পত্রের আবেদন (অপেক্ষমান)</p>
+                                    </div>
+                                    <div class="flex-between">
+                                        <p class="fw-medium fs-16 mb-0 numberfont"> টি</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <div class="avatar radius-4 bg-danger-transparent">
+                                        <i class="fa fa-wallet text-danger"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    
+                                    <div class="mb-1">
+                                        <p class="mb-0">নামের ছাড়পত্রের আবেদন (বাতিল)</p>
+                                    </div>
+                                    <div class="flex-between">
+                                        <p class="fw-medium fs-16 mb-0 numberfont"> টি</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <div class="avatar radius-4 bg-success-transparent">
+                                        <i class="fa fa-wallet text-success"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    
+                                    <div class="mb-1">
+                                        <p class="mb-0">নামের ছাড়পত্র </p>
+                                    </div>
+                                    <div class="flex-between">
+                                        <p class="fw-medium fs-16 mb-0 numberfont"> টি</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endcomment %}
+        
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+
+let district_wise_officer = {
+    series: [{
+        name: 'কর্মরত পুলিশ অফিসার',
+        data: {{ officer_counts | safe }},
+        borderRadius: 5,
+        dataLabels: {
+            enabled: true,
+            style: {
+                fontSize: '20px',
+                fontWeight: 'bolder',
+                colors: ['#000']
+            }
+        }
+    }],
+    chart: {
+        type: 'bar',
+        height: 350
+    },
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded'
+        }
+    },
+    colors: ['#95abf3'],
+    states: {
+        hover: {
+            filter: {
+                type: 'none'
+            }
+        },
+        active: {
+            filter: {
+                type: 'none'
+            }
+        },
+        normal: {
+            filter: {
+                type: 'none'
+            }
+        }
+    },
+    fill: {
+        colors: ['#587aeb'],
+        type: 'solid'
+    },
+    tooltip: {
+        y: {
+            formatter: function (val) {
+                return val + " জন";
+            }
+        }
+    },
+    xaxis: {
+        categories: {{ districts | safe }},
+        labels: {
+            style: {
+                fontWeight: '600'
+            }
+        }
+    },
+    yaxis: {
+        title: {
+            text: 'সংখ্যা',
+            style: {
+                fontWeight: '600'
+            }
+        },
+        labels: {
+            style: {
+                fontWeight: '600'
+            }
+        }
+    },
+    title: {
+        text: ` জেলাভিত্তিক কর্মরত পুলিশের সংখ্যা `,
+        align: 'center',
+        style: {
+            fontWeight: 600
+        }
+    }
+};
+
+
+
+let district_wise_officer_chart = new ApexCharts(document.querySelector("#district_wise_officer"), district_wise_officer);
+district_wise_officer_chart.render();
+
+	
+$('.dashboard_menu').addClass('active');
+$('.dashboard_menu').parents('li').addClass('active');
+$('.main-menu').addClass('active');
+
+</script>
+{% endblock %}

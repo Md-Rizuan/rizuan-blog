@@ -15,6 +15,7 @@ from .models import (
     Reply,
     District,
     Thana,
+    Todo,
     
 )
 from .forms import TextForm, AddBlogForm
@@ -223,6 +224,33 @@ def add_blog(request):
           "districts": District.objects.all()
      }
      return render(request, 'add_blog.html', context)
+
+def add_todo(request):
+     if request.method =="POST":
+          title = request.POST.get('title')
+          deadline = request.POST.get('deadline')
+          description = request.POST.get('description')
+
+          new_todo = Todo.objects.create(
+            title=title,
+            deadline=deadline,
+            description=description
+        )
+          return JsonResponse({'message':'Todo Added successfully', 'status':'success','id':new_todo.id})
+
+          
+     else:
+          todos= Todo.objects.all()
+          context = {
+               "todos":todos,
+               
+          }
+          return render(request, 'add_todo.html', context)
+     
+def updated_todo(request):
+     pass
+          
+          
         
 
 def get_thanas(request):

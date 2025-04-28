@@ -54,8 +54,6 @@ def register_user(request):
   
     form =UserRegistrationForm()
     if request.method == "POST":
-        print("POST request received!")  # Check if this appears
-        print("POST data:", request.POST)
         form = UserRegistrationForm(request.POST)
         
         if form.is_valid():

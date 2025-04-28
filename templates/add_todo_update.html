@@ -1,0 +1,343 @@
+{% extends "dashboard/base_updated.html" %}
+
+{% block title %}
+সার্কেল
+{% endblock %}
+
+{% block style %}
+	<style>
+
+		td,th{
+			text-align:center;
+			vertical-align: middle;
+		}
+
+    .btn {
+			font-size: .85rem;
+			border-radius: .35rem;
+			padding: .35rem .85rem;
+			box-shadow: none;
+			font-weight: 500;
+		}
+
+	</style>
+{% endblock %}
+
+{% block main_content %}
+<div class="list_div">
+	<div class="content_parent">
+		<div class="container-fluid">
+      <div class="row mb-3">
+        <div class="col-md-3 mb-3">
+          <input type="text" maxlength="140" id='search_title' {% if search_title %} value="{{search_title}}"{% endif %} class="form-control" name='search_title' 
+            placeholder="নাম লিখুন" aria-label="">
+        </div>
+				<div class="col-md-3 mb-3">
+					<select class="form-control" name='search_district' id='search_district'>
+						<option value="" selected>- সার্চ করার জন্য জেলা নির্বাচন করুন -</option>
+						
+                <option value=""></option>
+          
+					</select>
+				</div>
+				<div class="col-md-3">
+					<button type="submit" class="btn btn-primary  search_btn" >
+						<i class="fa fa-search pe-1"></i>সার্চ
+					</button>
+					&nbsp;
+					<a class="btn btn-danger" href="#"  >
+						<i class="fa fa-refresh"></i> রিসেট
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="card custom-card">
+						<div class="card-header d-flex justify-content-between">
+							<div class="card-title">
+								সার্কেল সংক্রান্ত তথ্য
+							</div>
+							<div>
+								<button type="button" class="btn green-btn btn-wave add">সার্কেল যুক্ত করুন</button>
+							</div>
+						</div>
+						<div class="card-body overflow-auto">
+							<table id="responsiveDataTable" class="table table-bordered text-nowrap w-100 table-striped table-hover">
+								<thead class='table-th-primary'>
+									<tr>
+										<th>নাম</th>
+										<th>জেলা</th>
+										<th>কার্যক্রম</th>
+									</tr>
+								</thead>
+								<tbody class="content_body">
+									{% csrf_token %}
+									
+										<tr data-id="{{unit_office.id}}">
+											<td style='width:40%'>{{unit_office.title}}</td>
+											<td style='width:40%'>{{unit_office.district}}</td>
+											<td >
+												<i class="fa fa-edit edit_button" 
+													data-id="{{ unit_office.id }}" 
+                          							data-title="{{unit_office.title}}" 
+													data-district="{{unit_office.district_id}}"
+												>
+												</i>
+												&nbsp;&nbsp;
+												<i class="fas fa-trash btn-delete" data-id="{{ unit_office.id }}" data-title="{{ unit_office.title }}"></i>
+											</td>
+										</tr>
+									
+											<tr>
+												<td class='text-center' colspan="3"> কোন সার্কেলের তথ্য নেই </td>
+											</tr>
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<div class="form_div">
+	<div class="content_parent">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="card custom-card">
+						<div class="card-header justify-content-between">
+							<div class="card-title action-card-title">
+								সার্কেল
+							</div>
+							<div>
+								<button type="button" class="btn green-btn view_list">সকল সার্কেল দেখুন</button>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="row">
+                <div class="col-md-6 mb-3">
+                  <input type="hidden" id="unit_office_id"  />
+
+				  
+									<div class='d-flex'>
+										<label for='title' class="form-label">নাম</label>
+										<span class="required_text">*</span>
+									</div>
+									<input type="text" maxlength="140" name='title' id='title' class="form-control required" placeholder="নাম লিখুন"
+									aria-label="নাম">
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class='d-flex'>
+										<label for='district' class="form-label">জেলা</label>
+										<span class="required_text">*</span>
+									</div>
+									<select class="form-control required" class='district_id' id='district' name='district'>
+										<option value="" selected>- জেলা নির্বাচন করুন -</option>
+										
+                        <option value=""></option>
+                 
+									</select>
+								</div>
+								<div class="col-md-12 d-flex justify-content-end ">
+									<button type="submit" class="btn green-btn save_button" data-btn='save'>
+										<i class="fa fa-floppy-disk pe-1"></i>সংরক্ষণ
+									</button>
+									<button class="btn green-btn update_button" style='display:none;' data-btn='update'>
+										<i class="fa fa-pencil"></i> আপডেট
+									</button>
+									&nbsp;
+									&nbsp;
+									<button class="btn btn-danger reset_button">
+										<i class="fa fa-refresh"></i> রিসেট
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+		
+{% endblock %}
+
+
+{% block script %}
+	<script>
+		function resetFields(){
+			$("input:not([name='csrfmiddlewaretoken']), select, #title, #unit_office_id").val("");
+			$("#district").val("").trigger('change').prop('disabled', false); 
+			$(".action-card-title").html("সার্কেল সংক্রান্ত তথ্য যুক্ত করুন"); 
+			$(".save_button").show();
+			$(".update_button").hide();
+			$(".error-message").remove();
+			$(".required").removeClass("error");
+		}
+	
+		$(document).ready(function(){
+      let url = window.location.href;
+			let sliced = url.indexOf("action") > 0 ? url.slice(url.indexOf("action")) : "";
+
+			$("a.page-link").each(function () {
+				this.href += sliced ? "&" + sliced : sliced;
+			});
+
+			$(".add").click(function () {
+				resetFields();
+				$(".list_div").slideUp(400);
+				$(".form_div").slideDown(600);
+			});
+	
+			$(".view_list").click(function () {
+				resetFields();
+				$(".form_div").slideUp(400);
+				$(".list_div").slideDown(600);
+			});
+
+   
+			
+			$(".reset_button").click(function(){
+				resetFields();
+			});
+
+			$(".edit_button").click(function () {
+				resetFields();
+				$(".action-card-title").html("সার্কেল সংক্রান্ত তথ্য আপডেট করুন")
+				$(".list_div").slideUp(400);
+				$(".form_div").slideDown(600)
+				$(".save_button").hide();
+				$(".update_button").show();
+				
+				let unit_office_id = $(this).data("id");
+				
+
+				let title = $(this).data("title");
+				console.log(title);
+				
+				let district = $(this).data("district");
+				console.log(district);
+				
+				$('#unit_office_id').val(unit_office_id);
+				$('#title').val(title);
+				$('#district').val(district).trigger('change').prop('disabled', true);
+			});
+			
+			$(".save_button, .update_button").click(function() {
+				let btn = $(this);
+				let btn_data = btn.data('btn');
+				let is_valid = IsValidFields();
+
+				let data_ = is_valid.form_data;
+				
+
+            	if(btn_data == 'update'){
+					data_.append("unit_office_id", $.trim($("#unit_office_id").val()));
+					data_.append("district", $.trim($("#district").val()));
+				}
+				
+       				 data_.append("action", btn_data);
+		 			 btn.attr("disabled", "disabled");
+					 
+					  
+					  
+				
+				$.ajax({
+					url:"#",
+					method:"POST",
+					data:data_,
+					contentType: false,
+					cache: false,
+					processData: false,
+					beforeSend: function(xhr, settings) {
+							xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+					},
+					success:function(data){							
+						if(data.status===1){
+							successMessage("সার্কেলের তথ্য সফলভাবে সংরক্ষণ করা হয়েছে।");
+              btn.removeAttr("disabled");
+							setTimeout(function () {
+									location.reload();
+							}, 1200);
+						} else if(data.status===10) {								
+								successMessage("সার্কেলের তথ্য সফলভাবে আপডেট করা হয়েছে।");
+								btn.removeAttr("disabled");
+                setTimeout(function () {
+                    location.reload();
+                }, 1200);
+						} else if(data.status===2) {
+							errorMessage("উক্ত সার্কেলের তথ্য ইতিমধ্যে বিদ্যমান।");
+							btn.removeAttr("disabled");
+            } else {
+							errorMessage("দুঃখিত, কোন ভুল সংঘটিত হয়েছে।");
+							btn.removeAttr("disabled");
+						}
+					},
+					error:function(err){
+						errorMessage("দুঃখিত, কোন ভুল সংঘটিত হয়েছে।");
+						btn.removeAttr("disabled");
+					}
+				});
+			});
+
+			$(document).on('click', '.btn-delete', function (e) {
+				e.preventDefault()
+				let unit_office_id = $(this).attr("data-id");
+				let title = $(this).attr("data-title");
+
+				$.confirm({
+					title: 'আপনি কি ' + title +' মুছে ফেলতে চান?',
+					content: '',
+					theme: 'material',
+					buttons: {
+						confirm: {
+							text: 'হ্যাঁ',
+							btnClass: 'btn-danger',
+							keys: ['enter'],
+							action: function () {
+								$.ajax({
+									url:"{% url 'add_todo_update' %}",
+									method: "POST",
+									data: {
+										unit_office_id: unit_office_id, action: "delete"
+									},
+									beforeSend: function(xhr, settings) {
+										xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+									},
+									success: function (data) {
+										if(data.status===1){
+											successMessage("সার্কেলের তথ্য সফলভাবে মুছে ফেলা হয়েছে");
+											setTimeout(function () {
+													location.reload();	
+											}, 1000);
+										} else if (data.message) {
+											errorMessage(data.message);
+										} else {
+											errorMessage("দুঃখিত, কোন ভুল সংঘটিত হয়েছে");
+										}
+									},
+									error: function (data) {
+										errorMessage("দুঃখিত, কোন ভুল সংঘটিত হয়েছে");
+									}
+								});
+							}
+						},
+						cancel: {
+							text: 'না',
+							btnClass: 'btn-success',
+							keys: ['esc'],
+							action: function () {
+							}
+						}
+					}
+				});
+			});
+
+    
+		
+	
+{% endblock %}
+-->

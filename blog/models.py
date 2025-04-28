@@ -33,8 +33,6 @@ class Tag(models.Model):
         super().save(*args, **kwargs)
 class District(models.Model):
     name = models.CharField(max_length=100)
-
-
     def __str__(self):
         return self.name
 class Thana(models.Model):
@@ -117,6 +115,16 @@ class Reply(models.Model):
 
     def __str__(self):
         return self.text
+    
+
+class Todo(models.Model):
+    title = models.CharField(max_length=100)
+    deadline = models.CharField(max_length=100)
+    description = models.CharField(max_length=100)
+    
+
+    def __str__(self):
+        return self.title
     
      
 
